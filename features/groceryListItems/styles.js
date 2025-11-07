@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
   },
+  listNameText: {
+    color: "white",
+  },
   listSection: {
     paddingTop: 40,
   },

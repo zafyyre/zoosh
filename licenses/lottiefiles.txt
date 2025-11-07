@@ -1,0 +1,8 @@
+Asset: "Checkbox Animation" (Checkmark animation)
+Author: Rodetyo Prastyo
+Source: https://lottiefiles.com/free-animation/checkbox-animation-g6Irty8JkF
+License: LottieFiles Free License
+License Details: https://lottiefiles.com/page/license
+
+Usage: Included as an animation inside the Zoosh grocery list app UI.
+No modifications were made except color/scale adjustments for display.

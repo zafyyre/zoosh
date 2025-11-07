@@ -16,6 +16,10 @@ export default {
     ios: {
       supportsTablet: true,
     },
+    ios: {
+      supportsTablet: true,
+      bundleIdentifier: "com.zafyyre.zoosh",
+    },
     android: {
       adaptiveIcon: {
         foregroundImage: "./assets/logo.png",
@@ -33,6 +37,7 @@ export default {
       FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
       FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
       FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
+      eas: { projectId: "c80a17dc-7db6-4a2f-bdbd-2b256f81d2ba" },
     },
   },
 };

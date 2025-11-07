@@ -8,15 +8,15 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
+  Keyboard,
 } from "react-native";
 import {
   GestureHandlerRootView,
   Swipeable,
 } from "react-native-gesture-handler";
 import stringSimilarity from "string-similarity";
-import LottieView from "lottie-react-native";
-import { Audio } from "expo-av";
-
+import Lottie from "../../components/Lottie";
+import { useAudioPlayer, setAudioModeAsync } from "expo-audio";
 import styles from "./styles";
 import {
   addItem,
@@ -41,11 +41,11 @@ export default function GroceryListItems() {
     return unsubscribe;
   }, []);
 
-  const handleSubmit = async () => {
+  const handleSaveItem = async () => {
     const trimmedInput = input.trim();
     if (trimmedInput === "") return;
 
-    const SIMILARITY_THRESHOLD = 0.6;
+    const SIMILARITY_THRESHOLD = 0.7;
 
     const exactMatch = groceryList.some(
       (item) => item.groceryItem.toLowerCase() === trimmedInput.toLowerCase()
@@ -91,6 +91,7 @@ export default function GroceryListItems() {
       if (editingItemId) {
         await updateItem(editingItemId, trimmedInput);
         setEditingItemId(null);
+        Keyboard.dismiss();
       } else {
         await addItem(trimmedInput);
       }
@@ -102,7 +103,7 @@ export default function GroceryListItems() {
   };
 
   // Handle checkmark press to delete the item
-  const handleCheck = (id) => {
+  const handleCheckmark = (id) => {
     // Unpack the current checked items
     // and set the item as checked
     // After a short delay, delete the item
@@ -137,17 +138,12 @@ export default function GroceryListItems() {
     ]);
   };
 
+  const dingPlayer = useAudioPlayer(require("../../assets/sounds/ding.mp3"));
+
   async function playDing() {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/sounds/ding.mp3")
-    );
-    await sound.playAsync();
-    // Unload sound after playing
-    sound.setOnPlaybackStatusUpdate((status) => {
-      if (status.didJustFinish) {
-        sound.unloadAsync();
-      }
-    });
+    await setAudioModeAsync({ playsInSilentMode: false }); // iOS mute-switch fix
+    dingPlayer.seekTo(0); // reset because expo-audio doesn't auto-rewind
+    dingPlayer.play();
   }
 
   // Render the grocery list items
@@ -159,9 +155,12 @@ export default function GroceryListItems() {
       >
         <View style={styles.container}>
           <ScrollView
-            contentContainerStyle={styles.scrollContainer}
+            // contentContainerStyle={styles.scrollContainer}
             keyboardShouldPersistTaps="handled"
           >
+            {/* <View style={styles.listName}>
+              <Text style={styles.listNameText}>grocery List</Text>
+            </View> */}
             <View style={styles.listSection}>
               {groceryList.map(({ id, groceryItem }) => (
                 <Swipeable
@@ -171,11 +170,11 @@ export default function GroceryListItems() {
                 >
                   <View style={styles.listItem}>
                     <TouchableOpacity
-                      onPress={() => handleCheck(id, groceryItem)}
+                      onPress={() => handleCheckmark(id, groceryItem)}
                       style={styles.checkContainer}
                     >
                       {checkedItems[id] ? (
-                        <LottieView
+                        <Lottie
                           source={require("../../assets/checkmark.json")}
                           autoPlay
                           loop={false}
@@ -212,11 +211,15 @@ export default function GroceryListItems() {
               placeholder="Type a grocery item"
               placeholderTextColor="#aaa"
               style={styles.input}
+              returnKeyType="Add"
+              blurOnSubmit={false} // <- critical for iOS
+              enablesReturnKeyAutomatically
+              onSubmitEditing={handleSaveItem}
               onBlur={() => {
                 setEditingItemId(null); // Exit update mode when tapping away
               }}
             />
-            <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+            <TouchableOpacity onPress={handleSaveItem} style={styles.button}>
               <Text style={styles.buttonText}>
                 {editingItemId ? "Update Item" : "Add Item"}
               </Text>

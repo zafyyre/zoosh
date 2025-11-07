@@ -1,0 +1,8 @@
+Sound Effect: "Ding"
+Author: Pixabay (Contributor: varies - sound is released under Pixabay license)
+Source: https://pixabay.com/sound-effects/c-371145/
+License: Pixabay License
+License Details: https://pixabay.com/service/license/
+
+Usage: Used as a UI confirmation sound effect when checking off an item.
+No modifications were made.
