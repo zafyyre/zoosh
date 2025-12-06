@@ -4,10 +4,10 @@ export default {
     slug: "zoosh",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./assets/logo.png",
+    icon: "./assets/images/logo.png",
     userInterfaceStyle: "light",
     splash: {
-      image: "./assets/logo.png",
+      image: "./assets/images/logo.png",
       resizeMode: "contain",
       backgroundColor: "#ffffff",
     },
@@ -17,14 +17,14 @@ export default {
     },
     android: {
       adaptiveIcon: {
-        foregroundImage: "./assets/logo.png",
+        foregroundImage: "./assets/images/logo.png",
         backgroundColor: "#ffffff",
       },
       package: "com.zafyyre.zoosh",
       edgeToEdgeEnabled: true,
     },
     web: {
-      favicon: "./assets/logo.png",
+      favicon: "./assets/images/logo.png",
     },
     extra: {
       SUPABASE_URL: process.env.EXPO_PUBLIC_SUPABASE_URL,

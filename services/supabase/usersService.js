@@ -1,4 +1,4 @@
-import supabase from '../../config/supabaseClient';
+import supabase from "./supabaseClient";
 
 export async function registerUser(
   firstName,
@@ -12,26 +12,26 @@ export async function registerUser(
   });
 
   if (signUpError) {
-    console.error('Error signing up:', signUpError);
+    console.error("Error signing up:", signUpError);
     return null;
   }
-  console.log('User signed up:', signUpData);
+  console.log("User signed up:", signUpData);
 
   const userId = signUpData.user.id;
 
   const { data: profileData, error: profileError } = await supabase
-    .from('users')
+    .from("users")
     .update({
       first_name: firstName,
       last_name: lastName,
     })
-    .eq('id', signUpData.user.id);
+    .eq("id", signUpData.user.id);
 
   if (profileError) {
-    console.error('Error creating profile:', profileError.message);
+    console.error("Error creating profile:", profileError.message);
     return null;
   }
-  console.log('Profile created:', profileData);
+  console.log("Profile created:", profileData);
 
   return userId;
 }
@@ -43,10 +43,10 @@ export async function signInUser(userEmail, userPassword) {
   });
 
   if (error) {
-    console.error('Login error:', error);
+    console.error("Login error:", error);
     return null;
   }
-  console.log('User logging in:', data);
+  console.log("User logging in:", data);
 
   return data.user;
 }
@@ -55,10 +55,10 @@ export async function signOutUser() {
   const { error } = await supabase.auth.signOut();
 
   if (error) {
-    console.error('Error signing out:', error.message);
+    console.error("Error signing out:", error.message);
     return null;
   } else {
-    console.log('User signed out successfully.');
+    console.log("User signed out successfully.");
   }
 }
 
@@ -66,10 +66,10 @@ export async function signOutUser() {
 export async function getCurrentUser() {
   const { data, error } = await supabase.auth.getUser();
   if (error) {
-    console.log('Cannot get user:', error.message)
+    console.log("Cannot get user:", error.message);
     return null;
   } else {
-    console.log('Got current user:', data.user)
+    console.log("Got current user:", data.user);
   }
   return data.user;
 }
@@ -79,17 +79,13 @@ export async function getUserProfile(userId) {
   const { data, error } = await supabase
     .from("users")
     .select("*")
-    .eq("id", userId)
+    .eq("id", userId);
 
   if (error) {
-    console.error('Cannot get user profile:', error.message)
+    console.error("Cannot get user profile:", error.message);
     return null;
   } else {
-    console.log('Retrieved user profile:', data)
+    console.log("Retrieved user profile:", data);
   }
   return data.user;
 }
-
-
-
-
