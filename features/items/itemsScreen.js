@@ -17,29 +17,52 @@ import {
 import stringSimilarity from "string-similarity";
 import Lottie from "../../components/Lottie";
 import { useAudioPlayer, setAudioModeAsync } from "expo-audio";
-import styles from "./styles";
+import styles from "./itemsStyles";
 import {
   addItem,
   listenToItems,
   updateItem,
   deleteItem,
-} from "../../services/firestore/items";
+  fetchAllItems,
+} from "../../services/supabase/itemsService";
 
-export default function GroceryListItems() {
+export default function ItemsScreen() {
   // State to manage input, grocery list items, and currently editing item ID
   const inputRef = useRef(null);
 
   const [input, setInput] = useState("");
-  const [groceryList, setGroceryList] = useState([]);
+  const [listItems, setListItems] = useState([]);
   const [editingItemId, setEditingItemId] = useState(null);
   const [checkedItems, setCheckedItems] = useState({});
 
   // Listen to grocery items from Firestore constantly
   // and update the state when items change
-  useEffect(() => {
-    const unsubscribe = listenToItems(setGroceryList);
-    return unsubscribe;
+  useEffect(function () {
+    async function loadData() {
+      const result = await fetchAllItems();
+
+      if (result) {
+        const groceryItems = result.map(function (row) {
+          return {
+            id: row.id,
+            groceryItem: row.item,
+          };
+        });
+        setListItems(groceryItems);
+      } else {
+        console.error("Could not await for data:", error.message);
+      }
+    }
+
+    loadData();
   }, []);
+
+  useEffect(
+    function () {
+      console.log("Updated listItems:", listItems);
+    },
+    [listItems]
+  );
 
   const handleSaveItem = async () => {
     const trimmedInput = input.trim();
@@ -47,11 +70,11 @@ export default function GroceryListItems() {
 
     const SIMILARITY_THRESHOLD = 0.7;
 
-    const exactMatch = groceryList.some(
+    const exactMatch = listItems.some(
       (item) => item.groceryItem.toLowerCase() === trimmedInput.toLowerCase()
     );
 
-    const fuzzyMatch = groceryList.find(
+    const fuzzyMatch = listItems.find(
       (item) =>
         stringSimilarity.compareTwoStrings(
           item.groceryItem.toLowerCase(),
@@ -162,7 +185,7 @@ export default function GroceryListItems() {
               <Text style={styles.listNameText}>grocery List</Text>
             </View> */}
             <View style={styles.listSection}>
-              {groceryList.map(({ id, groceryItem }) => (
+              {listItems.map(({ id, groceryItem }) => (
                 <Swipeable
                   key={id}
                   onSwipeableOpen={() => handleDelete(id, groceryItem)}

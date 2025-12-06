@@ -17,16 +17,16 @@ import {
 } from "react-native-gesture-handler";
 import stringSimilarity from "string-similarity";
 import Lottie from "../../components/Lottie";
-import styles from "./styles";
+import styles from "./listsStyles";
 import {
   addItem,
   listenToItems,
   updateItem,
   deleteItem,
-} from "../../services/firestore/items";
+} from "../../services/supabase/itemsService";
 
-export default function GroceryLists() {
-  const [groceryLists, setGroceryLists] = useState([]);
+export default function ListsScreen() {
+  const [lists, setLists] = useState([]);
   const [editingListId, setEditingListId] = useState([]);
 
   return (
