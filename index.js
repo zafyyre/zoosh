@@ -1,8 +1,14 @@
 import { registerRootComponent } from "expo";
 import ItemsScreen from "./features/items/itemsScreen";
 import ListsScreen from "./features/lists/listsScreen";
-import { registerUser, signInUser, signOutUser, getCurrentUser, getUserProfile } from "./services/supabase/usersService";
+import SignUpScreen from "./features/signup/signUpScreen";
 import { useEffect } from "react";
+import {
+  signInUser,
+  getCurrentUser,
+  getUserProfile,
+  signOutUser,
+} from "./services/supabase/usersService";
 
 // registerRootComponent(GroceryListItems);
 // registerRootComponent(GroceryLists);
@@ -27,7 +33,6 @@ function App() {
       const result = await getCurrentUser();
       getUserProfile(result.id);
       signOutUser();
-
     }
 
     testAuth();

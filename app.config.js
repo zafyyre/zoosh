@@ -1,5 +1,3 @@
-import "dotenv/config";
-
 export default {
   expo: {
     name: "zoosh",
@@ -15,9 +13,6 @@ export default {
     },
     ios: {
       supportsTablet: true,
-    },
-    ios: {
-      supportsTablet: true,
       bundleIdentifier: "com.zafyyre.zoosh",
     },
     android: {
@@ -25,20 +20,15 @@ export default {
         foregroundImage: "./assets/logo.png",
         backgroundColor: "#ffffff",
       },
+      package: "com.zafyyre.zoosh",
       edgeToEdgeEnabled: true,
     },
     web: {
       favicon: "./assets/logo.png",
     },
     extra: {
-      // FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
-      // FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
-      // FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
-      // FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
-      // FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
-      // FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
-      SUPABASE_URL: process.env.SUPABASE_URL,
-      SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+      SUPABASE_URL: process.env.EXPO_PUBLIC_SUPABASE_URL,
+      SUPABASE_ANON_KEY: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,
       eas: { projectId: "c80a17dc-7db6-4a2f-bdbd-2b256f81d2ba" },
     },
   },
