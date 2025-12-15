@@ -6,27 +6,55 @@ import Checkbox from "expo-checkbox";
 import color from "../../../styles/colors";
 import * as userService from "../../../services/supabase/usersService";
 
-export default function SignInScreen() {
+export default function SignInScreen({ navigation }) {
   const [checked, setChecked] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     console.log(checked);
   }, [checked]);
 
+  async function handleSignIn(email, password) {
+
+    try {
+      const user = userService.signInUser(email, password);
+      if (user) {
+        console.log("SUCCESS")
+      }
+    } catch (error) {
+      console.log("Login error:", error)
+      alert("Failed to sign in. Check your credentials. ")
+    }
+
+  };
+
   return (
     <View style={styles.container}>
+
       <View style={styles.containerBorder}>
+        
         <Image source={icon} style={styles.logo} />
+
         <Text style={styles.signInText}>Sign In</Text>
         <View>
           <Text style={styles.emailPassText}>Email</Text>
           <TextInput
             style={styles.emailPassInput}
             placeholder="your@email.com"
+            value={email}
+            onChangeText={setEmail}
           />
           <Text style={styles.emailPassText}>Password</Text>
-          <TextInput style={styles.emailPassInput} placeholder="******" />
+          <TextInput 
+            style={styles.emailPassInput} 
+            placeholder="******" 
+            value={password} 
+            onChangeText={setPassword} 
+          />
         </View>
+
         <View style={styles.checkboxContainer}>
           <Checkbox
             value={checked}
@@ -36,9 +64,11 @@ export default function SignInScreen() {
           ></Checkbox>
           <Text style={styles.checkboxText}>Remember me</Text>
         </View>
-        <TouchableOpacity style={styles.signInButton}>
+
+        <TouchableOpacity style={styles.signInButton} onPress={() => handleSignIn(email, password)}>
           <Text style={styles.signInButtonText}>Sign in</Text>
         </TouchableOpacity>
+
         <View style={styles.forgotText}>
           <Text>Forgot your password?</Text>
         </View>
