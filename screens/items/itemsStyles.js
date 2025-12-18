@@ -4,13 +4,15 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "black",
     flex: 1,
-    paddingTop: 50,
+    paddingTop: 110,
+    paddingBottom: 100,
   },
   listNameText: {
     color: "white",
   },
   listSection: {
-    paddingTop: 40,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   listItem: {
     paddingVertical: 6.25,

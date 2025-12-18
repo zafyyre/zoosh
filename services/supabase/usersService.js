@@ -19,9 +19,14 @@ export async function registerUser(
 
   const userId = signUpData.user.id;
 
+  if (!userId) {
+    console.error("Signup succeeded but user object missing");
+    return null;
+  }
+
   const { data: profileData, error: profileError } = await supabase
     .from("users")
-    .update({
+    .upsert({
       first_name: firstName,
       last_name: lastName,
     })
@@ -33,7 +38,10 @@ export async function registerUser(
   }
   console.log("Profile created:", profileData);
 
-  return userId;
+  return {
+    userId,
+    email: signUpData.user.email,
+  };
 }
 
 export async function signInUser(userEmail, userPassword) {
@@ -43,10 +51,10 @@ export async function signInUser(userEmail, userPassword) {
   });
 
   if (error) {
-    console.error("Login error:", error);
+    console.error("Login error:", error.message);
     return null;
   }
-  console.log("User logging in:", data);
+  console.log("User logging in:");
 
   return data.user;
 }

@@ -1,13 +1,14 @@
-import { db } from "../../config/firebase";
-import {
-  collection,
-  addDoc,
-  onSnapshot,
-  doc,
-  updateDoc,
-  deleteDoc,
-} from "firebase/firestore";
+import supabase from "./supabaseClient";
 
-export const addList = async (groceryList) => {
-  const ref = await addDoc();
-};
+export async function fetchAllLists() {
+  const { data: listData, error: listError } = await supabase
+    .from("lists")
+    .select("*");
+
+  if (listError) {
+    console.error("Error fetching lists:", listError.message);
+    return [];
+  }
+
+  return listData;
+}

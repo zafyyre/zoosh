@@ -1,40 +1,59 @@
 import { StyleSheet } from "react-native";
+import colors from "../../styles/colors";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "black",
+    backgroundColor: colors.white,
     flex: 1,
-    paddingTop: 50,
-  },
-  header: {
-    marginTop: 40,
-    marginBottom: 20,
-    alignItems: "center",
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: "700",
-    letterSpacing: 1,
-    color: "white",
+    paddingTop: 110,
+    paddingBottom: 100,
   },
   listSection: {
-    paddingTop: 40,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
-  listItem: {
-    paddingVertical: 6.25,
-    paddingHorizontal: 12,
-    borderRadius: 12,
+  userList: {
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 16,
     marginVertical: 5,
-    backgroundColor: "#333",
+    backgroundColor: colors.greenDeep,
     width: "95%",
     alignSelf: "center",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+
+    // Shadows
+    elevation: 4,
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
-  listItemText: {
-    color: "white",
-    fontSize: 18,
+  userListText: {
+    color: colors.white,
+    fontSize: 15,
+  },
+  addList: {
+    position: "absolute",
+    bottom: 120,
+    right: 40,
+    width: 60,
+    height: 60,
+    backgroundColor: colors.greenDark,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 5,
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  addListButton: {
+    color: colors.white,
+    fontSize: 30,
   },
 });
 

@@ -4,7 +4,7 @@ import styles from "./signInStyles";
 import icon from "../../../assets/images/logo.png";
 import Checkbox from "expo-checkbox";
 import color from "../../../styles/colors";
-import * as userService from "../../../services/supabase/usersService";
+import * as usersService from "../../../services/supabase/usersService";
 
 export default function SignInScreen({ navigation }) {
   const [checked, setChecked] = useState(false);
@@ -17,24 +17,21 @@ export default function SignInScreen({ navigation }) {
   }, [checked]);
 
   async function handleSignIn(email, password) {
-
     try {
-      const user = userService.signInUser(email, password);
+      const user = await usersService.signInUser(email, password);
       if (user) {
-        console.log("SUCCESS")
+        console.log("SUCCESS");
+        navigation.replace("Main");
       }
     } catch (error) {
-      console.log("Login error:", error)
-      alert("Failed to sign in. Check your credentials. ")
+      console.log("Login error:", error);
+      alert("Failed to sign in. Check your credentials. ");
     }
-
-  };
+  }
 
   return (
     <View style={styles.container}>
-
       <View style={styles.containerBorder}>
-        
         <Image source={icon} style={styles.logo} />
 
         <Text style={styles.signInText}>Sign In</Text>
@@ -47,11 +44,11 @@ export default function SignInScreen({ navigation }) {
             onChangeText={setEmail}
           />
           <Text style={styles.emailPassText}>Password</Text>
-          <TextInput 
-            style={styles.emailPassInput} 
-            placeholder="******" 
-            value={password} 
-            onChangeText={setPassword} 
+          <TextInput
+            style={styles.emailPassInput}
+            placeholder="******"
+            value={password}
+            onChangeText={setPassword}
           />
         </View>
 
@@ -65,7 +62,10 @@ export default function SignInScreen({ navigation }) {
           <Text style={styles.checkboxText}>Remember me</Text>
         </View>
 
-        <TouchableOpacity style={styles.signInButton} onPress={() => handleSignIn(email, password)}>
+        <TouchableOpacity
+          style={styles.signInButton}
+          onPress={() => handleSignIn(email, password)}
+        >
           <Text style={styles.signInButtonText}>Sign in</Text>
         </TouchableOpacity>
 
