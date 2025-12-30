@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: color.white,
     alignItems: "center",
-    justifyContent: "center",
+    paddingVertical: 225,
     flex: 1,
   },
   containerBorder: {
@@ -21,22 +21,23 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
   },
-  signUpText: {
+  updatePasswordText: {
     fontSize: 24,
     fontWeight: "bold",
     paddingVertical: 13,
     color: color.black,
     alignSelf: "center",
   },
-  registerContext: {
+  passwordContext: {
     alignSelf: "center",
     fontSize: 12,
     color: color.grayLight,
   },
-  userInfoText: {
-    paddingVertical: 10,
+  passwordText: {
+    paddingTop: 15,
+    paddingBottom: 10,
   },
-  userInfoInput: {
+  passwordInput: {
     borderColor: color.black,
     borderStyle: "solid",
     borderWidth: 2,
@@ -45,45 +46,15 @@ const styles = StyleSheet.create({
     width: 250,
     paddingHorizontal: 15,
   },
-  signUpButton: {
+  submitButton: {
     backgroundColor: color.black,
     borderRadius: 20,
     alignItems: "center",
     paddingVertical: 10,
     marginTop: 15,
   },
-  signUpButtonText: {
+  submitButtonText: {
     color: color.white,
-  },
-  seperator: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 15,
-  },
-  line: {
-    width: 110,
-    height: 1,
-    backgroundColor: color.grayDark,
-  },
-  alternateOption: {
-    marginHorizontal: 10,
-  },
-  signInContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  signIn: {
-    fontWeight: "bold",
-    borderBottomWidth: 0.5,
-    paddingBottom: 0.01,
-  },
-  errorText: {
-    color: "#ff4d4d",
-    fontSize: 12,
-    marginTop: 10,
-    fontWeight: "500",
   },
 });
 

@@ -1,11 +1,6 @@
 import supabase from "./supabaseClient";
 
-export async function registerUser(
-  firstName,
-  lastName,
-  userEmail,
-  userPassword
-) {
+export async function registerUser(userName, userEmail, userPassword) {
   const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
     email: userEmail,
     password: userPassword,
@@ -27,16 +22,15 @@ export async function registerUser(
   const { data: profileData, error: profileError } = await supabase
     .from("users")
     .upsert({
-      first_name: firstName,
-      last_name: lastName,
+      id: userId,
+      name: userName,
     })
-    .eq("id", signUpData.user.id);
+    .select();
 
   if (profileError) {
     console.error("Error creating profile:", profileError.message);
     return null;
   }
-  console.log("Profile created:", profileData);
 
   return {
     userId,

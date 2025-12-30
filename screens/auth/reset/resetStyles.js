@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.white,
     alignItems: "center",
     justifyContent: "center",
+    paddingVertical: 225,
     flex: 1,
   },
   containerBorder: {
@@ -14,29 +15,31 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 15,
     alignItems: "left",
+    marginHorizontal: 20,
     padding: 20,
+    width: undefined,
   },
   logo: {
     alignSelf: "center",
     width: 90,
     height: 90,
   },
-  signUpText: {
+  resetPasswordText: {
     fontSize: 24,
     fontWeight: "bold",
     paddingVertical: 13,
     color: color.black,
     alignSelf: "center",
   },
-  registerContext: {
+  passwordContext: {
     alignSelf: "center",
     fontSize: 12,
     color: color.grayLight,
   },
-  userInfoText: {
+  emailText: {
     paddingVertical: 10,
   },
-  userInfoInput: {
+  emailInput: {
     borderColor: color.black,
     borderStyle: "solid",
     borderWidth: 2,
@@ -45,45 +48,27 @@ const styles = StyleSheet.create({
     width: 250,
     paddingHorizontal: 15,
   },
-  signUpButton: {
+  sendCodeButton: {
     backgroundColor: color.black,
     borderRadius: 20,
     alignItems: "center",
     paddingVertical: 10,
     marginTop: 15,
   },
-  signUpButtonText: {
+  sendCodeButtonText: {
     color: color.white,
   },
-  seperator: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 15,
+  pinCodeContainer: {
+    width: 40, // Increased width slightly
+    height: 50,
+    borderRadius: 10, // Match your app's rounded aesthetic better
+    borderWidth: 1.5,
+    borderColor: color.black,
+    backgroundColor: color.white,
   },
-  line: {
-    width: 110,
-    height: 1,
-    backgroundColor: color.grayDark,
-  },
-  alternateOption: {
-    marginHorizontal: 10,
-  },
-  signInContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  signIn: {
-    fontWeight: "bold",
-    borderBottomWidth: 0.5,
-    paddingBottom: 0.01,
-  },
-  errorText: {
-    color: "#ff4d4d",
-    fontSize: 12,
-    marginTop: 10,
-    fontWeight: "500",
+  pinCodeText: {
+    fontSize: 20,
+    color: color.black,
   },
 });
 

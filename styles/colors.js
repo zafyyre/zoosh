@@ -10,7 +10,7 @@ const colors = {
   greenDeep: "#0A2F22",
 
   // Optional neutrals
-  grayLight: "#C7C9D1",
+  grayLight: "#6e6e6eff",
   grayDark: "#0A0A0A",
 };
 

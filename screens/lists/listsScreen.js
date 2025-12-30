@@ -8,6 +8,7 @@ import {
 import { useState, useEffect, useRef } from "react";
 import styles from "./listsStyles";
 import * as listsService from "../../services/supabase/listsService";
+import * as usersService from "../../services/supabase/usersService";
 
 export default function ListsScreen({ navigation }) {
   const [usersLists, setUsersLists] = useState([]);
@@ -15,7 +16,8 @@ export default function ListsScreen({ navigation }) {
 
   useEffect(function () {
     async function loadData() {
-      const result = await listsService.fetchAllLists();
+      const user = await usersService.getCurrentUser();
+      const result = await listsService.fetchAllListsByUser(user.id);
 
       console.log(result);
       setUsersLists(result);
@@ -34,12 +36,8 @@ export default function ListsScreen({ navigation }) {
     console.log("Cannot open list:", list.name);
   }
 
-  if (loading) {
-    return (
-      <View style={styles.container}>
-        <Text>Loading lists...</Text>
-      </View>
-    );
+  {
+    loading && <Text>Loading...</Text>;
   }
 
   return (

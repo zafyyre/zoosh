@@ -1,18 +1,25 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import SignInScreen from "../screens/auth/signin/signInScreen";
-import MainScreens from "./MainScreens";
+import AuthStack from "./AuthStack";
+import MainStack from "./MainStack";
 
 const Stack = createNativeStackNavigator();
 
-export default function AppNavigator() {
+export default function AppNavigator({ session, isRecovering }) {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="SignIn" component={SignInScreen} />
-        {/* <Stack.Screen name="SignOut" component={SignOutScreen} /> */}
-        <Stack.Screen name="Main" component={MainScreens} />
+        {session ? ( // if a session exists, log in
+          <Stack.Screen
+            name="MainStack"
+            component={MainStack}
+            initialParams={{ isRecovering }}
+          />
+        ) : (
+          // if not stay here
+          <Stack.Screen name="AuthStack" component={AuthStack} />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

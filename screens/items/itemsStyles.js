@@ -1,34 +1,41 @@
 import { StyleSheet } from "react-native";
+import colors from "../../styles/colors";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "black",
+    backgroundColor: colors.white,
     flex: 1,
     paddingTop: 110,
     paddingBottom: 100,
   },
   listNameText: {
-    color: "white",
+    color: colors.white,
   },
   listSection: {
     paddingTop: 10,
     paddingBottom: 10,
   },
   listItem: {
-    paddingVertical: 6.25,
-    paddingHorizontal: 12,
-    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 20,
     marginVertical: 5,
-    backgroundColor: "#333",
+    backgroundColor: colors.black,
     width: "95%",
     alignSelf: "center",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+
+    elevation: 4,
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   listItemText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 15,
   },
   input: {
     width: "80%",
@@ -68,28 +75,47 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   checkContainer: {
-    width: 40,
-    height: 40,
+    width: 20,
+    height: 20,
     justifyContent: "center",
     alignItems: "center",
   },
   checkmark: {
-    width: 40,
-    height: 40,
+    width: 20,
+    height: 20,
     transform: [{ scale: 4 }],
   },
   textContainer: {
     flex: 1,
-    justifyContent: "center",
-    marginLeft: 12.5,
+    marginLeft: 15,
   },
   emptyCircle: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     borderRadius: 15,
     borderWidth: 2,
     borderColor: "#ccc",
     backgroundColor: "transparent",
+  },
+  addList: {
+    position: "absolute",
+    bottom: 140,
+    right: 40,
+    width: 60,
+    height: 60,
+    backgroundColor: colors.black,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 5,
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  addListButton: {
+    color: colors.white,
+    fontSize: 30,
   },
 });
 

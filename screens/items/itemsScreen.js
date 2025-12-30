@@ -5,7 +5,6 @@ import {
   TextInput,
   Text,
   View,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   Keyboard,
@@ -15,7 +14,6 @@ import {
   Swipeable,
 } from "react-native-gesture-handler";
 import stringSimilarity from "string-similarity";
-import Lottie from "../../components/Lottie";
 import { useAudioPlayer, setAudioModeAsync } from "expo-audio";
 import styles from "./itemsStyles";
 import * as itemsService from "../../services/supabase/itemsService";
@@ -46,13 +44,6 @@ export default function ItemsScreen({ navigation, route }) {
       loadData();
     },
     [listId]
-  );
-
-  useEffect(
-    function () {
-      console.log("Updated listItems:", listItems);
-    },
-    [listItems]
   );
 
   // const handleSaveItem = async () => {
@@ -160,72 +151,39 @@ export default function ItemsScreen({ navigation, route }) {
   //   dingPlayer.play();
   // }
 
-  if (loading) {
-    return (
-      <View style={styles.container}>
-        <Text>Loading Items...</Text>
-      </View>
-    );
+  {
+    loading && <Text>Loading...</Text>;
   }
 
   // Render the grocery list items
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        style={{ flex: 1 }}
+    <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.listSection}
+        showsVerticalScrollIndicator={false}
       >
-        <View style={styles.container}>
-          <ScrollView
-            // contentContainerStyle={styles.scrollContainer}
-            keyboardShouldPersistTaps="handled"
-          >
-            {/* <View style={styles.listName}>
-              <Text style={styles.listNameText}>grocery List</Text>
-            </View> */}
-            <View style={styles.listSection}>
-              {listItems.map((item) => (
-                <View key={item.id} style={styles.listItem}>
-                  <View style={styles.checkContainer}>
-                    <View style={styles.emptyCircle} />
-                  </View>
-                  <View style={styles.textContainer}>
-                    <Text
-                      style={styles.listItemText}
-                      onPress={() => navigation.goBack()}
-                    >
-                      {item.name}
-                    </Text>
-                  </View>
-                </View>
-              ))}
+        {listItems.map((item) => (
+          <View key={item.id} style={styles.listItem}>
+            <View style={styles.checkContainer}>
+              <View style={styles.emptyCircle} />
             </View>
-          </ScrollView>
 
-          {/* <View style={styles.inputSection}>
-            <TextInput
-              ref={inputRef}
-              value={input}
-              onChangeText={setInput}
-              placeholder="Type a grocery item"
-              placeholderTextColor="#aaa"
-              style={styles.input}
-              returnKeyType="Add"
-              blurOnSubmit={false} // <- critical for iOS
-              enablesReturnKeyAutomatically
-              onSubmitEditing={handleSaveItem}
-              onBlur={() => {
-                setEditingItemId(null); // Exit update mode when tapping away
-              }}
-            />
-            <TouchableOpacity onPress={handleSaveItem} style={styles.button}>
-              <Text style={styles.buttonText}>
-                {editingItemId ? "Update Item" : "Add Item"}
-              </Text>
-            </TouchableOpacity>
-          </View> */}
-        </View>
-      </KeyboardAvoidingView>
-    </GestureHandlerRootView>
+            <View style={styles.textContainer}>
+              <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                style={{ alignSelf: "flex-start" }}
+                activeOpacity={0.7}
+              >
+                <Text style={styles.listItemText}>{item.name}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        ))}
+      </ScrollView>
+
+      <TouchableOpacity style={styles.addList} activeOpacity={0.8}>
+        <Text style={styles.addListButton}>+</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
