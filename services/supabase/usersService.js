@@ -81,7 +81,8 @@ export async function getUserProfile(userId) {
   const { data, error } = await supabase
     .from("users")
     .select("*")
-    .eq("id", userId);
+    .eq("id", userId)
+    .single();
 
   if (error) {
     console.error("Cannot get user profile:", error.message);
@@ -89,5 +90,5 @@ export async function getUserProfile(userId) {
   } else {
     console.log("Retrieved user profile:", data);
   }
-  return data.user;
+  return data;
 }

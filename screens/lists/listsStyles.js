@@ -8,6 +8,25 @@ const styles = StyleSheet.create({
     paddingTop: 110,
     paddingBottom: 100,
   },
+  navbar: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center", // center everything by default
+    paddingVertical: 5,
+    backgroundColor: "white",
+    position: "relative",
+    marginTop: -50,
+  },
+  topLeft: {
+    color: colors.black,
+    fontSize: 16,
+    position: "absolute",
+    left: 40, // username on the left
+  },
+  logo: {
+    width: 60,
+    height: 60,
+  },
   listSection: {
     paddingTop: 10,
     paddingBottom: 10,
@@ -54,6 +73,26 @@ const styles = StyleSheet.create({
   addListButton: {
     color: colors.white,
     fontSize: 30,
+  },
+  deleteAction: {
+    backgroundColor: "#FF3B30", // Official iOS Red
+    justifyContent: "center",
+    alignItems: "flex-end",
+    width: "100%", // This allows the red to fill the screen as you pull
+    flex: 1,
+  },
+  deleteText: {
+    color: "white",
+    fontWeight: "600",
+    paddingHorizontal: 30, // Distance from the right edge
+  },
+  errorText: {
+    // Add this style so your error message looks decent
+    color: "#FF3B30",
+    textAlign: "center",
+    marginVertical: 10,
+    paddingHorizontal: 20,
+    fontWeight: "500",
   },
 });
 

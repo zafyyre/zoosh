@@ -17,6 +17,8 @@ import stringSimilarity from "string-similarity";
 import { useAudioPlayer, setAudioModeAsync } from "expo-audio";
 import styles from "./itemsStyles";
 import * as itemsService from "../../services/supabase/itemsService";
+import * as listsService from "../../services/supabase/listsService";
+import Navbar from "../../navigation/Navbar/Navbar";
 
 export default function ItemsScreen({ navigation, route }) {
   const { listId } = route.params;
@@ -28,23 +30,33 @@ export default function ItemsScreen({ navigation, route }) {
   const [editingItemId, setEditingItemId] = useState(null);
   const [checkedItems, setCheckedItems] = useState({});
   const [loading, setLoading] = useState(true);
+  const [listName, setListName] = useState("");
 
   // Listen to grocery items from Firestore constantly
   // and update the state when items change
-  useEffect(
-    function () {
-      async function loadData() {
-        const result = await itemsService.getAllItemsByList(listId);
+  useEffect(() => {
+    async function loadData() {
+      const result = await itemsService.getAllItemsByList(listId);
 
-        console.log(result);
-        setListItems(result);
-        setLoading(false);
+      console.log(result);
+      setListItems(result);
+      setLoading(false);
+    }
+
+    async function fetchList() {
+      if (!listId) return;
+
+      try {
+        const list = await listsService.fetchListById(listId); // fetch the full list object
+        if (list) setListName(list.name); // set the list name state
+      } catch (error) {
+        console.error("Error fetching list name:", error);
       }
+    }
 
-      loadData();
-    },
-    [listId]
-  );
+    fetchList();
+    loadData();
+  }, [listId]);
 
   // const handleSaveItem = async () => {
   //   const trimmedInput = input.trim();
@@ -158,6 +170,7 @@ export default function ItemsScreen({ navigation, route }) {
   // Render the grocery list items
   return (
     <View style={styles.container}>
+      <Navbar screen="ItemsScreen" currentList={listName} />
       <ScrollView
         contentContainerStyle={styles.listSection}
         showsVerticalScrollIndicator={false}

@@ -104,7 +104,7 @@ export default function ResetScreen({ navigation }) {
                       onTextChange={(text) => setToken(text)}
                       onFilled={(text) => {
                         setToken(text);
-                        submitToken(token); // <-- pass the OTP directly
+                        submitToken(text); // <-- pass the OTP directly
                       }}
                       theme={{
                         containerStyle: {
