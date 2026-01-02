@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center", // center everything by default
     paddingVertical: 5,
+    paddingHorizontal: 55,
     backgroundColor: "white",
     position: "relative",
     marginTop: -50,
@@ -21,7 +22,13 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: 16,
     position: "absolute",
-    left: 40, // username on the left
+    left: 45,
+  },
+  signOut: {
+    color: colors.black,
+    fontSize: 16,
+    position: "absolute",
+    right: 60,
   },
   logo: {
     width: 60,
@@ -74,17 +81,24 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 30,
   },
-  deleteAction: {
-    backgroundColor: "#FF3B30", // Official iOS Red
+  deleteActionWrapper: {
+    left: 10,
+    paddingLeft: 5,
     justifyContent: "center",
-    alignItems: "flex-end",
-    width: "100%", // This allows the red to fill the screen as you pull
-    flex: 1,
+    alignItems: "center",
+    height: "100%",
+  },
+  deleteAction: {
+    justifyContent: "center",
+    alignItems: "center",
   },
   deleteText: {
+    backgroundColor: "red",
     color: "white",
     fontWeight: "600",
-    paddingHorizontal: 30, // Distance from the right edge
+    paddingVertical: 12,
+    paddingHorizontal: 25, // Distance from the right edge
+    borderRadius: 20,
   },
   errorText: {
     // Add this style so your error message looks decent

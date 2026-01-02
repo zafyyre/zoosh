@@ -70,8 +70,6 @@ export async function getCurrentUser() {
   if (error) {
     console.log("Cannot get user:", error.message);
     return null;
-  } else {
-    console.log("Got current user:", data.user);
   }
   return data.user;
 }
@@ -87,8 +85,6 @@ export async function getUserProfile(userId) {
   if (error) {
     console.error("Cannot get user profile:", error.message);
     return null;
-  } else {
-    console.log("Retrieved user profile:", data);
   }
   return data;
 }

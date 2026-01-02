@@ -40,7 +40,24 @@ export async function createList(userId, listName) {
     .single();
 
   if (error) {
-    console.error("Error creating list:".error.message);
+    console.error("Error creating list:", error.message);
+    return null;
+  }
+
+  return data;
+}
+
+export async function updateListName(listId, userId, listName) {
+  const { data, error } = await supabase
+    .from("lists")
+    .update({ name: listName })
+    .eq("owner_id", userId)
+    .eq("id", listId)
+    .select()
+    .maybeSingle();
+
+  if (error) {
+    console.error("Error updating list:", error.message);
     return null;
   }
 

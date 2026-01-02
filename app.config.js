@@ -7,6 +7,7 @@ export default {
     icon: "./assets/images/logo-transparent-black.png",
     userInterfaceStyle: "light",
     scheme: "exp://s83sldu-zafyyre-8081.exp.direct",
+    plugins: ["expo-audio", "expo-asset"],
     splash: {
       image: "./assets/images/logo-transparent-black.png",
       resizeMode: "contain",
